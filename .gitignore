@@ -1,14 +1,14 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
+**/__pycache__/
+**/*.py[cod]
 *$py.class
 
 # C extensions
 *.so
 
 # Environments
-.env
-.env.*
+**/.env
+**/.env.*
 .venv
 venv/
 ENV/
@@ -24,6 +24,5 @@ active_env/
 .DS_Store
 
 # ADK Local Storage
-.adk/
-session.db
-**/social_agent/.adk/
+**/.adk/
+**/session.db
