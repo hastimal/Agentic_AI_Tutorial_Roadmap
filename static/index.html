@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendAI - Social AI Agent Dashboard</title>
+    <!-- Import Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="app-container">
+        <!-- Main Header -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fa-solid fa-wand-magic-sparkles brand-icon"></i>
+                <h1>Trend<span>AI</span></h1>
+                <span class="badge">Social Agent v2.0</span>
+            </div>
+            <div class="system-status">
+                <span class="status-indicator online"></span>
+                <span class="status-text">Gemini 3.5 Active</span>
+            </div>
+        </header>
+
+        <!-- Dashboard Layout -->
+        <main class="dashboard-grid">
+            
+            <!-- Column 1: Trend Radar -->
+            <section class="panel trend-radar-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-tower-broadcast animate-pulse"></i> Real-time Trend Radar</h2>
+                    <button id="refresh-trends-btn" class="icon-btn" title="Scan for emerging trends">
+                        <i class="fa-solid fa-rotate"></i>
+                    </button>
+                </div>
+                <p class="panel-desc">Scans global search volumes and social platforms to extract high-momentum keywords before competitors.</p>
+                <div id="trends-list" class="trends-list">
+                    <!-- Loading state -->
+                    <div class="loading-state">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Loading emerging trends...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Column 2: Generator Configuration -->
+            <section class="panel config-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-sliders"></i> Campaign Builder</h2>
+                </div>
+                <p class="panel-desc">Configure your brand positioning to target emerging trend gaps.</p>
+                
+                <form id="campaign-form">
+                    <div class="form-group">
+                        <label for="brand-name">Brand or Product Name</label>
+                        <input type="text" id="brand-name" placeholder="e.g. Antigravity Cloud" required value="Antigravity Cloud">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trend-select-display">Selected Trend</label>
+                        <input type="text" id="trend-select-display" readonly placeholder="Click a trend on the left to select" required class="readonly-input">
+                        <input type="hidden" id="trend-select-val">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keywords-input">Keywords (Comma separated)</label>
+                        <input type="text" id="keywords-input" placeholder="e.g. serverless, agent orchestration, vertex-ai" required value="serverless, agentic orchestration, vertex ai">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="target-audience">Target Audience</label>
+                        <select id="target-audience">
+                            <option value="Software Engineers & Tech Leads">Software Engineers & Developers</option>
+                            <option value="Digital Marketing Managers">Digital Marketers & GEO Leaders</option>
+                            <option value="Enterprise C-Suite Execs">Enterprise Execs (CTO/CIO)</option>
+                            <option value="General Public">General Tech Enthusiasts</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="generate-btn" class="primary-btn">
+                        <i class="fa-solid fa-bolt"></i> Generate Social-First Campaign
+                    </button>
+                </form>
+            </section>
+
+            <!-- Column 3: Output Hub & GEO Analytics -->
+            <section class="panel output-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-share-nodes"></i> Campaign Output & GEO Insights</h2>
+                </div>
+                
+                <!-- GEO Score Banner -->
+                <div class="geo-banner">
+                    <div class="geo-progress-circle" id="geo-circle">
+                        <span id="geo-score-val">0%</span>
+                        <svg class="geo-svg">
+                            <circle class="circle-bg" cx="30" cy="30" r="26"></circle>
+                            <circle class="circle-progress" id="geo-progress-bar" cx="30" cy="30" r="26" style="stroke-dashoffset: 163;"></circle>
+                        </svg>
+                    </div>
+                    <div class="geo-info">
+                        <h3>GEO Score (AI Visibility Rank)</h3>
+                        <p id="geo-rationale">Select a trend and run generation to review optimization metrics for AI engines.</p>
+                    </div>
+                </div>
+
+                <!-- Tabs Menu -->
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="reddit-tab"><i class="fa-brands fa-reddit"></i> Reddit (Q&A)</button>
+                    <button class="tab-btn" data-tab="linkedin-tab"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
+                    <button class="tab-btn" data-tab="youtube-tab"><i class="fa-brands fa-youtube"></i> YouTube Script</button>
+                    <button class="tab-btn" data-tab="insights-tab"><i class="fa-solid fa-lightbulb"></i> GEO Tips</button>
+                </div>
+
+                <!-- Tabs Content -->
+                <div class="tabs-content-container">
+                    <!-- Reddit Tab -->
+                    <div class="tab-content active" id="reddit-tab">
+                        <div class="output-header">
+                            <span>Markdown Content Optimized for Reddit Retrieval</span>
+                            <button class="copy-btn" onclick="copyContent('reddit-code')"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre id="reddit-code" class="code-output">Your generated Reddit post will appear here...</pre>
+                    </div>
+
+                    <!-- LinkedIn Tab -->
+                    <div class="tab-content" id="linkedin-tab">
+                        <div class="output-header">
+                            <span>High-Engagement Thought Leadership Post</span>
+                            <button class="copy-btn" onclick="copyContent('linkedin-code')"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre id="linkedin-code" class="code-output">Your generated LinkedIn post will appear here...</pre>
+                    </div>
+
+                    <!-- YouTube Tab -->
+                    <div class="tab-content" id="youtube-tab">
+                        <div class="output-header">
+                            <span>Script Optimized for Autogenerated Text Indexing</span>
+                            <button class="copy-btn" onclick="copyContent('youtube-code')"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre id="youtube-code" class="code-output">Your generated YouTube script will appear here...</pre>
+                    </div>
+
+                    <!-- GEO Insights Tips Tab -->
+                    <div class="tab-content" id="insights-tab">
+                        <div class="output-header">
+                            <span>Actionable Tips to Boost AI Search Engine Rankings</span>
+                        </div>
+                        <ul class="tips-list" id="geo-tips-list">
+                            <li><i class="fa-solid fa-circle-info"></i> Generate content to see specific generative search optimization suggestions.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Competitor Report Modal -->
+    <div id="modal-container" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Competitor Gaps Report</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <pre id="modal-report-text">Report text goes here...</pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
