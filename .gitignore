@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Environments
+.env
+.env.*
+.venv
+venv/
+ENV/
+env/
+test_env/
+active_env/
+
+# IDEs / OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# ADK Local Storage
+.adk/
+session.db
+**/social_agent/.adk/
