@@ -15,16 +15,18 @@ env_path = os.path.join(os.path.dirname(__file__), ".env")
 if os.path.exists(env_path):
     load_dotenv(env_path)
 
-# Runner setup using an in-memory session credentials service
 credential_service = InMemoryCredentialService()
-runner = Runner(credential_service=credential_service)
+try:
+    runner = Runner(app_name="social_agent", agent=root_agent, session_service=credential_service)
+except TypeError:
+    runner = Runner(app_name="social_agent", agent=root_agent, credential_service=credential_service)
 
 async def run_trend_analysis() -> list:
     """Fetches emerging trends using the agent's tools."""
     try:
         prompt = "Please retrieve the latest emerging trends using your fetch_emerging_trends tool."
         response_text = ""
-        async for event in runner.run_async(root_agent, prompt):
+        async for event in runner.run_async(user_id="user", session_id="session", new_message=prompt):
             if hasattr(event, "content") and event.content:
                 for part in event.content.parts:
                     if hasattr(part, "text") and part.text:
@@ -58,7 +60,7 @@ async def generate_social_content(trend: str, brand_name: str, keywords: list, a
             f"Be sure to check competitor coverage for this trend using your check_competitor_coverage tool first!"
         )
         response_text = ""
-        async for event in runner.run_async(root_agent, prompt):
+        async for event in runner.run_async(user_id="user", session_id="session", new_message=prompt):
             if hasattr(event, "content") and event.content:
                 for part in event.content.parts:
                     if hasattr(part, "text") and part.text:

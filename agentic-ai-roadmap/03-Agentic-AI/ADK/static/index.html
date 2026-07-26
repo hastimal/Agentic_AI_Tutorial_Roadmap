@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Multi-Agent Hub</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="glass-bg"></div>
+
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fa-solid fa-feather-pointed neon-pulse"></i>
+                <span>Antigravity <span class="accent-text">GEO Hub</span></span>
+            </div>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>Agent Server: Online</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <section class="control-panel">
+            <!-- Part 1: Emerging Trends -->
+            <div class="card glass-card">
+                <h2><i class="fa-solid fa-chart-line"></i> Emerging Tech Trends</h2>
+                <p class="subtitle">Select a verified trend from our GEO analysis engine:</p>
+                <div id="trends-loading" class="loader-container">
+                    <div class="spinner"></div>
+                    <span>Scanning search graphs...</span>
+                </div>
+                <div id="trends-container" class="trends-grid hidden">
+                    <!-- Dynamic Trends Chips go here -->
+                </div>
+            </div>
+
+            <!-- Part 2: Configuration Form -->
+            <div class="card glass-card">
+                <h2><i class="fa-solid fa-sliders"></i> Copywriter Persona Settings</h2>
+                <form id="generator-form">
+                    <div class="form-group">
+                        <label for="brand-name">Brand Name</label>
+                        <input type="text" id="brand-name" placeholder="e.g. Antigravity Cloud" required value="Antigravity Cloud">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="audience">Target Audience</label>
+                        <select id="audience">
+                            <option value="Enterprise Architects">Enterprise Architects</option>
+                            <option value="AI Developers & Engineers" selected>AI Developers & Engineers</option>
+                            <option value="Tech Startup Founders">Tech Startup Founders</option>
+                            <option value="General Public & Hobbyists">General Public & Hobbyists</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keywords">Key Concepts (Comma separated)</label>
+                        <input type="text" id="keywords" placeholder="e.g. local LLM, latency optimization, private AI" required value="local LLM, latency, private AI">
+                    </div>
+
+                    <button type="submit" id="generate-btn" class="btn btn-primary" disabled>
+                        <span><i class="fa-solid fa-sparkles"></i> Generate GEO Content</span>
+                        <div class="btn-spinner hidden"></div>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="results-panel">
+            <!-- Loading Indicator -->
+            <div id="generation-loader" class="card glass-card centered-loading hidden">
+                <div class="spinner-large"></div>
+                <h3>Agent Executing Strategy...</h3>
+                <p id="loader-status">Fetching competitor footprint, identifying search index gaps, and drafting optimized copies.</p>
+            </div>
+
+            <!-- Results Dashboard -->
+            <div id="results-dashboard" class="hidden">
+                <!-- Competitor Analysis Card -->
+                <div class="card glass-card competitor-alert">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Competitor Indexing Insights</h3>
+                    <pre id="competitor-insights"></pre>
+                </div>
+
+                <!-- Social Copies Tabs -->
+                <div class="card glass-card tabbed-card">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="linkedin"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
+                        <button class="tab-btn" data-tab="reddit"><i class="fa-brands fa-square-reddit"></i> Reddit</button>
+                        <button class="tab-btn" data-tab="youtube"><i class="fa-brands fa-youtube"></i> YouTube Script</button>
+                        <button class="tab-btn" data-tab="rationale"><i class="fa-solid fa-lightbulb"></i> GEO Rationale</button>
+                    </div>
+                    <div class="tab-content active" id="tab-linkedin">
+                        <div class="post-preview" id="linkedin-copy"></div>
+                    </div>
+                    <div class="tab-content" id="tab-reddit">
+                        <div class="post-preview" id="reddit-copy"></div>
+                    </div>
+                    <div class="tab-content" id="tab-youtube">
+                        <div class="post-preview" id="youtube-copy"></div>
+                    </div>
+                    <div class="tab-content" id="tab-rationale">
+                        <div class="post-preview" id="rationale-copy"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty Welcome state -->
+            <div id="welcome-state" class="card glass-card welcome-card">
+                <i class="fa-solid fa-compass-drafting welcome-icon"></i>
+                <h2>GEO Optimization Dashboard</h2>
+                <p>Select an emerging tech trend and click generate to invoke your copywriter agent. The agent will run competitor crawls and return search-engine optimized content.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>Powered by Google Antigravity SDK & Gemini Models</p>
+    </footer>
+
+    <!-- Link JS -->
+    <script src="app.js"></script>
+</body>
+</html>
